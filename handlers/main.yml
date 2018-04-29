@@ -1,5 +1,10 @@
 ---
 
+- name: reloading rc.d
+  command:
+    name: "update-rc.d {{ zookeeper_service }} defaults"
+  become: yes
+
 - name: Restart zookeeper
   service:
     name: "{{ zookeeper_service }}"
