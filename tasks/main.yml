@@ -16,10 +16,13 @@
       - name: Creating zookeeper service  ... ... ... ...
         template:
           src: zookeeper.service.j2
-          dest: "/etc/init.d/zookeeper"
+          dest: "/etc/init.d/{{ zookeeper_service }}"
         notify: reloading rc.d
         become: yes
 
+      - name: reloading rc.d
+        command: update-rc.d '{{ zookeeper_service }}' defaults
+        become: yes
 
 
       - name: Creating log directories ... ... ... ...
